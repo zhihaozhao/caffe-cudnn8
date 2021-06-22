@@ -75,7 +75,7 @@ This version code can directly work with cuDNN8.x, If you do want to use caffe w
 
 #### Step 5 Configure environment
 	vim ~/.bashrc
-	export PYTHONPATH=$PYTHONPATH:/home/Jremy-J-J/caffe/python
+	export PYTHONPATH=$PYTHONPATH:/home/Jeremy-J-J/caffe/python
 	
 	source ~/.bashrc
 
