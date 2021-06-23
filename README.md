@@ -1,14 +1,24 @@
-# Caffe with cuDNN8
-The original version caffe can only work with cuDNN7.x, but since CUDA11.x, only cudnn8 is supported, so I made some changes in code to make caffe able to work with CUDA11.x + cuDNN8.x.
+# Caffe-cuDNN8 with yolo layer
+The caffe-cudnn8-yolo version can work with yolov3.
 
-I have made code changes in fo cudnn8:
-
+I have made code changes in for cudnn8 / upsample / yolo:
+	for cudnn8:
        cmake/Cuda.cmake
        src/caffe/layers/cudnn_ndconv_layer.cu
        src/caffe/layers/cudnn_conv_layer.cpp
        src/caffe/layers/cudnn_deconv_layer.cpp
+	
+	for upsample:
+		include/caffe/layers/upsample_layer.hpp
+		src/caffe/layers/upsample_layer.cpp
+		src/caffe/proto/caffe.proto
+		
+	for yolo:
+		include/caffe/layers/yolov3_layer.hpp
+		src/caffe/layers/yolov3_layer.cpp
+		src/caffe/proto/caffe.proto
 
-This version code can directly work with cuDNN8.x, If you do want to use caffe with cudnn7.x(original caffe), you need to make these changes in the above files:
+This version code can directly work with cuDNN8.x/yolov3, If you want to use caffe with cudnn7.x(original caffe), you need to make these changes in the above files:
 
     1) Open the file “cmake/Cuda.cmake”.  replace "cudnn_version.h" with "cudnn.h" by commenting/uncommenting the lines where they are.
     2) In cudnn_ndconv_layer.cu, cudnn_conv_layer.cpp and cudnn_deconv_layer.cpp  change all "if CUDNN_VERSION_MIN(8, 0, 0)  // 0" to "#if 0 // CUDNN_VERSION_MIN(8, 0, 0)".
@@ -24,9 +34,8 @@ This version code can directly work with cuDNN8.x, If you do want to use caffe w
 	sudo pip install graphviz	
 
 
-#### Step 2 download caffe-cudnn8 source code
-	git clone https://github.com/Jeremy-J-J/caffe-cudnn8.git
-	
+#### Step 2 download caffe-cudnn8-yolo source code
+	git clone -b caffe-cudnn8-yolo https://github.com/Jeremy-J-J/caffe-cudnn8.git
 	
 #### Step 3 Build settings
 	Although I provide the Makefile.config and Makefile that can directly work, but i think you also need to know how it works.
